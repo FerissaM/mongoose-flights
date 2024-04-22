@@ -17,4 +17,12 @@ router.get('/flights/new', flightsController.new);
 // Route for creating a new flight
 router.post('/flights', flightsController.create);
 
+router.get('/about', function(req, res, next) {
+  res.render('about', { title: 'About Us' });
+});
+
+router.get('/contact', function(req, res, next) {
+  res.render('contact', { title: 'Contact Us' });
+});
+
 module.exports = router;

@@ -1,5 +1,3 @@
-// flightController.js
-
 const Flight = require('../models/flight');
 
 exports.index = async function(req, res, next) {
@@ -36,3 +34,31 @@ exports.new = function(req, res, next) {
     // Your logic for displaying the new flight form
     res.render('flights/new', { title: 'Add Flight' });
   };
+
+  exports.show = async function(req, res, next) {
+    try {
+      const flight = await Flight.findById(req.params.id);
+      if (!flight) {
+        return res.status(404).send('Flight not found');
+      }
+      res.render('flights/show', { flight: flight });
+    } catch (error) {
+      next(error);
+    }};
+
+    exports.addDestination = async function(req, res, next) {
+        try {
+          const flight = await Flight.findById(req.params.id);
+          if (!flight) {
+            return res.status(404).send('Flight not found');
+          }
+          flight.destinations.push({
+            airport: req.body.airport,
+            arrival: req.body.arrival
+          });
+          await flight.save();
+          res.redirect('/flights/' + flight._id);
+        } catch (error) {
+          next(error);
+        }
+      };
