@@ -1,38 +1,24 @@
-// models/flight.js
-
 const mongoose = require('mongoose');
+const destinationSchema = require('./destination');
 
-const { Schema } = mongoose;
-
-// Define Flight Schema
-const flightSchema = new Schema({
+const flightSchema = new mongoose.Schema({
   airline: {
     type: String,
-    enum: ['American', 'Southwest', 'United'], // Add more options if needed
-    required: true,
-  },
-  airport: {
-    type: String,
-    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'], // Add more options if needed
-    default: 'DEN',
+    enum: ['American', 'Southwest', 'United'],
+    required: true
   },
   flightNo: {
     type: Number,
     required: true,
     min: 10,
-    max: 9999,
+    max: 9999
   },
   departs: {
     type: Date,
-    default: () => {
-      const oneYearFromNow = new Date();
-      oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
-      return oneYearFromNow;
-    },
+    required: true,
+    default: Date.now
   },
+  destinations: [destinationSchema] // Using destinationSchema as a subdocument
 });
 
-// Create Flight model
-const Flight = mongoose.model('Flight', flightSchema);
-
-module.exports = Flight;
+module.exports = mongoose.model('Flight', flightSchema);
