@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Flights</title>
+</head>
+<body>
+    <h1>All Flights</h1>
+    <ul>
+        <% flights.forEach(function(flight) { %>
+            <li>
+                <p>Airline: <%= flight.airline %></p>
+                <p>Airport: <%= flight.airport %></p>
+                <p>Flight No: <%= flight.flightNo %></p>
+                <p>Departure: <%= flight.departs %></p>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
