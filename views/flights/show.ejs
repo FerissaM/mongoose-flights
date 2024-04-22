@@ -1,5 +1,3 @@
-<!-- views/flights/show.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +20,18 @@
             </li>
         <% }); %>
     </ul>
+
+    <h2>Tickets</h2>
+    <ul>
+        <% tickets.forEach(function(ticket) { %>
+            <li>
+                Seat: <%= ticket.seat %><br>
+                Price: <%= ticket.price %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <a href="/flights/<%= flight._id %>/tickets/new" class="btn">New Ticket</a>
 
     <h2>Add Destination</h2>
     <form action="/flights/<%= flight._id %>/destinations" method="POST">
