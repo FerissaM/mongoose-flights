@@ -1,28 +1,10 @@
-var express = require('express');
-var router = express.Router();
-const flightsController = require('../controllers/flightsController');
+const express = require('express');
+const router = express.Router();
+const Flight = require('../models/flight');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home Page' });
-});
-
-
-// Route for viewing all flights
-router.get('/flights', flightsController.index);
-
-// Route for displaying the new flight form
-router.get('/flights/new', flightsController.new);
-
-// Route for creating a new flight
-router.post('/flights', flightsController.create);
-
-router.get('/about', function(req, res, next) {
-  res.render('about', { title: 'About Us' });
-});
-
-router.get('/contact', function(req, res, next) {
-  res.render('contact', { title: 'Contact Us' });
+// Index route for flights
+router.get('/', async (req, res) => {
+    res.render('index', { title: 'mongoose-flights'});
 });
 
 module.exports = router;
